@@ -13,7 +13,8 @@ class OrderdetailsController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Orders::all();
+        return $orders;
     }
 
     /**
@@ -29,7 +30,16 @@ class OrderdetailsController extends Controller
      */
     public function store(StoreOrderdetailsRequest $request)
     {
-        //
+        $orders = new Orders;
+        $orders->user_id = $request->user_id;
+        $orders->order_type = $request->order_type;
+        $orders->order_status = $request->order_status;
+        $orders->order_total = $request->order_total;
+        
+
+        $orders->save();
+        return $orders;
+        // return response()->json(['message' => 'Menu created successfully'], 201);
     }
 
     /**
@@ -53,7 +63,13 @@ class OrderdetailsController extends Controller
      */
     public function update(UpdateOrderdetailsRequest $request, Orderdetails $orderdetails)
     {
-        //
+        $orders = Orders::find($request->id);
+
+
+        $orders->user_id = $request->user_id;
+        $orders->order_type = $request->order_type;
+        $orders->order_status = $request->order_status;
+        $orders->order_total = $request->order_total;
     }
 
     /**

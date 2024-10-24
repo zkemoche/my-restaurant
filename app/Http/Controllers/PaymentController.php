@@ -13,7 +13,8 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        //
+        $payment = Payment::all();
+        return $payment;
     }
 
     /**
@@ -29,7 +30,17 @@ class PaymentController extends Controller
      */
     public function store(StorePaymentRequest $request)
     {
-        //
+        $payment = new Orders;
+        $payment->payment_type = $request->payment_type;
+        $payment->amount = $request->amount;
+        $payment->user_id = $request->user_id;
+        $payment->payment_status = $request->payment_status;
+        $payment->order_id = $request->order_id;
+        
+
+        $orders->save();
+        return $orders;
+        // return response()->json(['message' => 'Menu created successfully'], 201);
     }
 
     /**
@@ -53,7 +64,14 @@ class PaymentController extends Controller
      */
     public function update(UpdatePaymentRequest $request, Payment $payment)
     {
-        //
+        $payment = Payment::find($request->id);
+
+
+        $payment->payment_type = $request->payment_type;
+        $payment->amount = $request->amount;
+        $payment->user_id = $request->user_id;
+        $payment->payment_status = $request->payment_status;
+        $payment->order_id = $request->order_id;
     }
 
     /**

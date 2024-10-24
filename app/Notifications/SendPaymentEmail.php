@@ -6,17 +6,24 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use App\Models\Payment;
+use App\Models\User;
+
 
 class SendPaymentEmail extends Notification
 {
     use Queueable;
+    protected $user;
+    protected $payment;
+
 
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct(User $user, Payment $payment)
     {
-        //
+        $this->user = $user;
+        $this->payment = $payment;
     }
 
     /**

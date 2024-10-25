@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\OrderdetailsController;
 use App\Http\Controllers\PaymentController;
 
@@ -16,11 +17,17 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+// Route::middleware(['auth:sanctum'])->group (function () {
 
 Route::apiResources([
     'categories' => CategoryController::class,
     'menus' => MenuController::class,
-    'orders' => OrderdetailsController::class,
+    'orders' => OrdersController::class,
+    'orderdetails' => OrderdetailsController::class,
     'payment' => PaymentController::class,
 ]);
+
+    Route::get('/getOrderdetails/{id}', [OrdersController::class,
+    'getOrderdetails']);
+// });
 

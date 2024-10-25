@@ -74,6 +74,9 @@ class MenuController extends Controller
         $menu->category_id = $request->category_id;
         $menu->offers = $request->offers;
         $menu->allergens = $request->allergens;
+
+        $menu->save();
+        return $menu;
     }
 
     /**

@@ -9,13 +9,11 @@ use Illuminate\Notifications\Notification;
 use App\Models\Payment;
 use App\Models\User;
 
-
 class SendPaymentEmail extends Notification
 {
     use Queueable;
     protected $user;
     protected $payment;
-
 
     /**
      * Create a new notification instance.
@@ -42,8 +40,11 @@ class SendPaymentEmail extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
+                    ->subject('Your MyRestaurant Payment Notice')
+                    ->greeting('Hi '. $this->user->name)
+                    ->line('We have received payment for your order no: '. $this->payment->order_id)
+                    ->line('Your order is currently being processed and will be dispatched soon')
+                    // ->action('Notification Action', url('/'))
                     ->line('Thank you for using our application!');
     }
 

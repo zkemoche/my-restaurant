@@ -6,7 +6,6 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\OrdersController;
-use App\Http\Controllers\OrderdetailsController;
 use App\Http\Controllers\PaymentController;
 
 
@@ -17,17 +16,13 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-// Route::middleware(['auth:sanctum'])->group (function () {
+// Route::middleware(['auth:sanctum'])->group(function () {
+    Route::apiResources([
+        'categories' => CategoryController::class,
+        'menus' => MenuController::class,
+        'orders' => OrdersController::class,
+        'payments' => PaymentController::class,
+    ]);
 
-Route::apiResources([
-    'categories' => CategoryController::class,
-    'menus' => MenuController::class,
-    'orders' => OrdersController::class,
-    'orderdetails' => OrderdetailsController::class,
-    'payment' => PaymentController::class,
-]);
-
-    Route::get('/getOrderdetails/{id}', [OrdersController::class,
-    'getOrderdetails']);
+    Route::get('/getOrderDetails/{id}', [OrdersController::class, 'getOrderDetails']);
 // });
-
